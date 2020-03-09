@@ -2,10 +2,11 @@ package id.dtprsty.simpleunittesting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mainViewModel: MainViewModel
 
@@ -15,41 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = MainViewModel(CuboidModel())
 
-        val length = etLength.text.toString().trim()
-        val widht = etWidth.text.toString().trim()
-        val height = etHeight.text.toString().trim()
-
-        when{
-            length.isEmpty() -> etLength.error = "Fill this form"
-            widht.isEmpty() -> etWidth.error = "Fill this form"
-            height.isEmpty() -> etHeight.error = "Fill this form"
-
-            else -> {
-                val l = length.toDouble()
-                val w = widht.toDouble()
-                val h = height.toDouble()
-
-                btnSave.setOnClickListener {
-                    mainViewModel.save(w, l, h)
-                    visible()
-                }
-
-                btnCalculateCircumference.setOnClickListener {
-                    mainViewModel.getCircumference()
-                    gone()
-                }
-
-                btnCalculateVolume.setOnClickListener {
-                    mainViewModel.getVolume()
-                    gone()
-                }
-
-                btnCalculateSurface.setOnClickListener {
-                    mainViewModel.getSurfaceArea()
-                    gone()
-                }
-            }
-        }
+        btnSave.setOnClickListener(this)
+        btnCalculateVolume.setOnClickListener(this)
+        btnCalculateSurface.setOnClickListener(this)
+        btnCalculateCircumference.setOnClickListener(this)
     }
 
     private fun visible(){
@@ -64,5 +34,42 @@ class MainActivity : AppCompatActivity() {
         btnCalculateSurface.visibility = View.GONE
         btnSave.visibility = View.GONE
         btnCalculateCircumference.visibility = View.GONE
+    }
+
+    override fun onClick(v: View?) {
+        val length = etLength.text.toString().trim()
+        val widht = etWidth.text.toString().trim()
+        val height = etHeight.text.toString().trim()
+
+        when{
+            length.isEmpty() -> etLength.error = "Field can not empty"
+            widht.isEmpty() -> etWidth.error = "Field can not empty"
+            height.isEmpty() -> etHeight.error = "Field can not empty"
+
+            else -> {
+                val l = length.toDouble()
+                val w = widht.toDouble()
+                val h = height.toDouble()
+
+                when{
+                    v?.id == R.id.btnSave -> {
+                        mainViewModel.save(w, l, h)
+                        visible()
+                    }
+                    v?.id == R.id.btnCalculateCircumference -> {
+                        tvResult.text = mainViewModel.getCircumference().toString()
+                        gone()
+                    }
+                    v?.id == R.id.btnCalculateVolume -> {
+                        tvResult.text = mainViewModel.getVolume().toString()
+                        gone()
+                    }
+                    v?.id == R.id.btnCalculateSurface -> {
+                        tvResult.text = mainViewModel.getSurfaceArea().toString()
+                        gone()
+                    }
+                }
+            }
+        }
     }
 }
