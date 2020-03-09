@@ -3,6 +3,7 @@ package id.dtprsty.simpleunittesting
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -19,6 +20,6 @@ class UtilsTest {
         }catch (e: ParseException){
             e.printStackTrace()
         }
-        assertEquals("Sat, 29 Feb 2020", Utils.toSimpleString(date))
+        assertEquals("Sat, 29 Feb 2020", Utils().toSimpleString(date))
     }
 }
