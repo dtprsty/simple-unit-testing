@@ -4,7 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 
 class MainViewModelTest {
 
@@ -19,31 +19,33 @@ class MainViewModelTest {
     private val dummyCircumference = 100.0
     private val dummySurfaceArea = 396.0
 
-    /*@Before
+    @Before
     fun before(){
         cuboidModel = mock(CuboidModel::class.java)
         mainViewModel = MainViewModel(cuboidModel)
-    }*/
+    }
 
     @Test
     fun getCircumference() {
-        mainViewModel.getCircumference()
+        `when`(mainViewModel.getCircumference()).thenReturn(dummyCircumference)
+        val circumference = mainViewModel.getCircumference()
+        verify(cuboidModel).getCircumference()
+        assertEquals(dummyCircumference, circumference, 0.0001)
     }
 
     @Test
     fun getSurfaceArea() {
+        `when`(mainViewModel.getSurfaceArea()).thenReturn(dummySurfaceArea)
+        val surfaceArea = mainViewModel.getSurfaceArea()
+        verify(cuboidModel).getSurfaceArea()
+        assertEquals(dummySurfaceArea, surfaceArea, 0.0001)
     }
 
     @Test
     fun getVolume() {
-        cuboidModel = CuboidModel()
-        mainViewModel = MainViewModel(cuboidModel)
-        mainViewModel.save(dummyWidth, dummyLength, dummyHeight)
+        `when`(mainViewModel.getVolume()).thenReturn(dummyVolume)
         val volume = mainViewModel.getVolume()
+        verify(cuboidModel).getVolume()
         assertEquals(dummyVolume, volume, 0.0001)
-    }
-
-    @Test
-    fun save() {
     }
 }
