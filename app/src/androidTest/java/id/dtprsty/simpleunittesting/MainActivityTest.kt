@@ -33,9 +33,6 @@ class MainActivityTest {
         onView(withId(R.id.etWidth)).perform(typeText(dummyWidth), closeSoftKeyboard())
         onView(withId(R.id.etHeight)).perform(typeText(dummyHeight), closeSoftKeyboard())
 
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
-
         onView(withId(R.id.btnCalculateCircumference)).check(matches(isDisplayed()))
         onView(withId(R.id.btnCalculateCircumference)).perform(click())
 
@@ -48,9 +45,6 @@ class MainActivityTest {
         onView(withId(R.id.etLength)).perform(typeText(dummyLength), closeSoftKeyboard())
         onView(withId(R.id.etWidth)).perform(typeText(dummyWidth), closeSoftKeyboard())
         onView(withId(R.id.etHeight)).perform(typeText(dummyHeight), closeSoftKeyboard())
-
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
 
         onView(withId(R.id.btnCalculateSurface)).check(matches(isDisplayed()))
         onView(withId(R.id.btnCalculateSurface)).perform(click())
@@ -65,9 +59,6 @@ class MainActivityTest {
         onView(withId(R.id.etWidth)).perform(typeText(dummyWidth), closeSoftKeyboard())
         onView(withId(R.id.etHeight)).perform(typeText(dummyHeight), closeSoftKeyboard())
 
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
-
         onView(withId(R.id.btnCalculateVolume)).check(matches(isDisplayed()))
         onView(withId(R.id.btnCalculateVolume)).perform(click())
 
@@ -79,33 +70,27 @@ class MainActivityTest {
     @Test
     fun emptyInput() {
         // pengecekan input untuk length
+        onView(withId(R.id.btnCalculateVolume)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnCalculateVolume)).perform(click())
         onView(withId(R.id.etLength)).perform(typeText(emptyInput), closeSoftKeyboard())
-
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
 
         onView(withId(R.id.etLength)).check(matches(hasErrorText(fieldEmpty)))
         onView(withId(R.id.etLength)).perform(typeText(dummyLength), closeSoftKeyboard())
 
         // pengecekan input untuk width
+        onView(withId(R.id.btnCalculateVolume)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnCalculateVolume)).perform(click())
         onView(withId(R.id.etWidth)).perform(typeText(emptyInput), closeSoftKeyboard())
-
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
 
         onView(withId(R.id.etWidth)).check(matches(hasErrorText(fieldEmpty)))
         onView(withId(R.id.etWidth)).perform(typeText(dummyWidth), closeSoftKeyboard())
 
         // pengecekan input untuk height
+        onView(withId(R.id.btnCalculateVolume)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnCalculateVolume)).perform(click())
         onView(withId(R.id.etHeight)).perform(typeText(emptyInput), closeSoftKeyboard())
-
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
 
         onView(withId(R.id.etHeight)).check(matches(hasErrorText(fieldEmpty)))
         onView(withId(R.id.etHeight)).perform(typeText(dummyHeight), closeSoftKeyboard())
-
-        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
-        onView(withId(R.id.btnSave)).perform(click())
     }
 }
